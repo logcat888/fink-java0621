@@ -51,6 +51,7 @@ public class Flink03_Source_Kafka {
         // 4.原样变换,mapDS, 加入共享组
         SingleOutputStreamOperator<String> shareGroupDS = mapDS
                 .map((MapFunction<String, String>) s -> s)
+                .startNewChain() // 开启新的任务链
                 .slotSharingGroup("1"); //加入共享组
 
         // 3.打印数据
