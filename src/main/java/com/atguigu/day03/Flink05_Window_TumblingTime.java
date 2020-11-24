@@ -44,6 +44,9 @@ if (Math.abs(offset) >= size) {throw new IllegalArgumentException(
   window(SlidingProcessingTimeWindows.of(Time.days(1),Time.hours(-8)))
 9. 会话 window(EventTimeSessionWindows.withGap(Time.seconds(10)))
 10. 全窗口函数apply: WindowFunction<IN, OUT, KEY, W extends Window> W为一个窗口函数
+11. SparkStreaming和Flink关于窗口函数的区别。
+    SparkStreaming的窗口是先有数据集rdd，再将多个RDD union在一起，形成窗口。并且sparkStreaming没有计数窗口。
+    Flink是先有桶，之后窗口内的数据进入桶中，窗口是通过开始时间与结束时间确定。
  */
 public class Flink05_Window_TumblingTime {
     public static void main(String[] args) throws Exception {
